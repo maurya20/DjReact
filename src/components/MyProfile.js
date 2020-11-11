@@ -1,12 +1,12 @@
 import React from 'react'
 import { View, Text } from 'react-native'
 
-const ThirdPage = () => {
+const SecondPage = () => {
     return (
         <View>
-            <Text>33333rrrrrrdddddpppppaaaaggggeeee</Text>
+            <Text>My Profile</Text>
         </View>
     )
 }
 
-export default ThirdPage
+export default SecondPage
