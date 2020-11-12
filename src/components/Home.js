@@ -2,7 +2,7 @@ import 'react-native-gesture-handler';
 import * as React from 'react';
 import { TextInput } from 'react-native-gesture-handler'
 import { useEffect, useState } from 'react';
-import { ActivityIndicator, FlatList,StyleSheet, Text, View } from 'react-native';
+import { ActivityIndicator, FlatList,StyleSheet, Text, View,Image } from 'react-native';
 import Axios from 'axios';
 
 
@@ -35,9 +35,9 @@ const Home = () => {
               return index.toString();
             }}
             renderItem={({ item }) => {
-              console.log("item", item)
               return (
-              <View style={{padding:20}}>
+              <View style={{margin:2}}>
+                <Image source={{uri:`https://picsum.photos/200/${item.id+290}`}} style={{width: 400, height: 400}}/>
               <Text style={{fontSize:30,color:'red'}}>{item.name}</Text>
               <Text>{item.username} {item.email}</Text>
               <Text>{item.address.city}</Text>
