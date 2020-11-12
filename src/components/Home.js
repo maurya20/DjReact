@@ -22,7 +22,7 @@ const Home = () => {
       }
       )
       .then(({ data }) => {
-          setData(data.collections)
+          setData(data.restaurants)
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
@@ -41,9 +41,10 @@ const Home = () => {
             renderItem={({ item }) => {
               return (
               <View style={{margin:2}}>
-                <Image source={{uri:item.collection.image_url}} style={{width: 400, height: 400}}/>
-              <Text style={{fontSize:30,color:'red'}}>{item.collection.title}</Text>
-              <Text>{item.collection.description}</Text>
+                <Image source={item.restaurant.thumb?{uri:item.restaurant.thumb}:null} style={{width: 400, height: 400}}/>
+              <Text style={{fontSize:30,color:'red'}}>{item.restaurant.name}</Text>
+              <Text style={{fontSize:30,color:`#${item.restaurant.user_rating.rating_color}`}}>Average Rating: {item.restaurant.user_rating.aggregate_rating}</Text>
+              <Text>{item.restaurant.location.address}</Text>
               </View>
               )
             }}
