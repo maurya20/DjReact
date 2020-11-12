@@ -20,7 +20,7 @@ const styles = StyleSheet.create({
     backgraoundStyle:{
             marginTop:1,
             flex:1,
-            backgroundColor:"gray"
+            backgroundColor:"gray",
   },
         inputStyle: {
           height: 50,
@@ -40,7 +40,8 @@ const styles = StyleSheet.create({
             marginHorizontal:123,
             paddingLeft:10,
             backgroundColor:"blue",
-            color:"white"
+            color:"white",
+           
         }
   })
 
