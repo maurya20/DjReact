@@ -16,9 +16,13 @@ const Home = () => {
     const [data, setData] = useState([]);
   
     useEffect(() => {
-      Axios.get('http://jsonplaceholder.typicode.com/users')
-        .then(({ data }) => {
-          setData(data)
+      Axios.get('https://developers.zomato.com/api/v2.1/search?entity_id=1&entity_type=city&q=New%20Delhi&sort=cost&order=desc',
+      {
+      headers:{'user-key':'7f79883e5acc935e480f048b718f8f0c'}
+      }
+      )
+      .then(({ data }) => {
+          setData(data.collections)
         })
         .catch((error) => console.error(error))
         .finally(() => setLoading(false));
@@ -37,10 +41,9 @@ const Home = () => {
             renderItem={({ item }) => {
               return (
               <View style={{margin:2}}>
-                <Image source={{uri:`https://picsum.photos/200/${item.id+290}`}} style={{width: 400, height: 400}}/>
-              <Text style={{fontSize:30,color:'red'}}>{item.name}</Text>
-              <Text>{item.username} {item.email}</Text>
-              <Text>{item.address.city}</Text>
+                <Image source={{uri:item.collection.image_url}} style={{width: 400, height: 400}}/>
+              <Text style={{fontSize:30,color:'red'}}>{item.collection.title}</Text>
+              <Text>{item.collection.description}</Text>
               </View>
               )
             }}
