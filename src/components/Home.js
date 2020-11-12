@@ -14,6 +14,7 @@ const Home = () => {
  
     const [isLoading, setLoading] = useState(true);
     const [data, setData] = useState([]);
+    const [search, setSearch] = useState("")
   
     useEffect(() => {
       Axios.get('https://developers.zomato.com/api/v2.1/search?entity_id=1&entity_type=city&q=New%20Delhi&sort=cost&order=desc',
@@ -28,14 +29,22 @@ const Home = () => {
         .finally(() => setLoading(false));
     }, []);
   
+
+// For Search option 
+    const filteredData = data.filter((item) => {
+      return item.restaurant.name.toLowerCase().indexOf(search.toLowerCase()) !== -1
+    })
+
+
+
+   
     return (
       <View>
-         <TextInput style={styles.inputStyle} placeholder=" 🔍 Search..."/>
+         <TextInput style={styles.inputStyle} placeholder=" 🔍 Search..." onChangeText={search=>setSearch(search)}/>
         {isLoading ? <ActivityIndicator /> : (
           <FlatList
-            data={data}
+            data={filteredData}
             keyExtractor={(item, index) => {
-              // console.log("index", index)
               return index.toString();
             }}
             renderItem={({ item }) => {
@@ -52,34 +61,7 @@ const Home = () => {
         )}
       </View>
     );
-  };
-
-
-     
-   
-//     return (
-//         <View>
-//             <TextInput style={styles.inputStyle} placeholder=" 🔍 Search..."/>
-//             <Text style={styles.heading}>Your Movies List</Text>
-//             <FlatList
-//           data={data}
-//           keyExtractor={(data) => data.id}
-//           renderItem={({ item }) => (
-//             <Text>{item.title}, {item.releaseYear}</Text>
-//           )}
-//         />  
-//         <Text style={styles.heading}>List of users</Text>
-//         <FlatList
-//         data={users}
-//         keyExtractor={(data) => data.id}
-//         renderItem={({item}) => (
-//               <Text>{item.name}</Text>
-//         )}
-//         /> 
-        
-//         </View>
-//     )
-// }
+  }
  
 const styles = StyleSheet.create({
     backgraoundStyle:{
